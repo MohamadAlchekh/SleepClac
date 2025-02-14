@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your sleeping hours with one press to improve your sleep ">
+    <meta name="keywords" content="Sleep, Sleep Calculator, Sleeping">
+    <meta name="author" content="Mohamad Alchekh">
+    <!-- <meta http-equiv="refresh" content="5"> this is to refresh the page every 5 seconds -->
+    <title>Sleep Calculator</title>
+</head>
+<body>
+<h1>Sleep Calculator</h1>
+<h2>A calculator that will help you on other things than math</h2>    
+<p>Here calculate your sleep hours easily</p>
+<p>I want to <b>wake up</b> at </p>
+<form id="sleepForm" action="../Backend/index.php" method="post" >
+
+<select name="Hours" id="hours" required>  
+    <option value="Select-Hours">Select Hours</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option selected value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+</select>
+
+<select name="Minutes" id="minutes" required>
+    <option value="Select-Minutes">Select Minutes</option>
+    <option selected value="00">00</option>
+    <option value="05">05</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+    <option value="25">25</option>
+    <option value="30">30</option>
+    <option value="35">35</option>
+    <option value="40">40</option>
+    <option value="45">45</option>
+    <option value="50">50</option>
+    <option value="55">55</option>
+</select>
+
+<select name="AmPm" id="AmPm" required>
+    <option selected value="AM">AM</option>
+    <option value="PM">PM</option>
+</select>
+
+<input type="submit" value="Calculate">
+
+</form>
+
+<p id="sleepResult"></p>
+
+<script>
+    function handleFormSubmission(formId, resultId) {
+        document.getElementById(formId).addEventListener("submit", function(event) {
+            event.preventDefault();  
+
+            let formData = new FormData(this);
+
+            fetch("../Backend/index.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(resultId).innerHTML = data;
+            })
+        });
+    }
+
+    // Attach event listeners for both forms
+    handleFormSubmission("sleepForm", "sleepResult");
+</script>
+</body>
+</html>
