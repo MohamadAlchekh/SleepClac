@@ -15,7 +15,9 @@
 <h2>A calculator that will help you on other things than math</h2>    
 <p>Here calculate your sleep hours easily</p>
 <p>I want to <b>wake up</b> at </p>
-<form id="sleepForm" action="../Backend/index.php" method="post" >
+
+<!-- Return sleep hours -->
+<form id="sleepForm" method="post" style="display: inline;" >
 
 <select name="Hours" id="hours" required>  
     <option value="Select-Hours">Select Hours</option>
@@ -54,32 +56,89 @@
     <option value="PM">PM</option>
 </select>
 
+<input type="hidden" name="type" value="sleep">
 <input type="submit" value="Calculate">
 
 </form>
 
-<p id="sleepResult"></p>
 
-<script>
-    function handleFormSubmission(formId, resultId) {
-        document.getElementById(formId).addEventListener("submit", function(event) {
-            event.preventDefault();  
+<!-- Sleep now from -->
+<form style="display: inline;" id="SleepNow" method="post">
+        <!-- Hidden elements i will send to backend  -->
+    <input type="hidden" name="Hours" class="hourInput">
+    <input type="hidden" name="Minutes" class="minuteInput">
+    <input type="hidden" name="AmPm" class="AmPmInput">
 
-            let formData = new FormData(this);
+    <input type="hidden" name="type" value="sleepNow">
+    <input type="submit" value="Sleep Now">
+    
+</form>
 
-            fetch("../Backend/index.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById(resultId).innerHTML = data;
-            })
-        });
-    }
+<p>I want to <b>sleep at</b> at </p>
 
-    // Attach event listeners for both forms
-    handleFormSubmission("sleepForm", "sleepResult");
-</script>
+<!-- Return wake up hours -->
+<form id="WakeUpForm" method="post" style="display: inline;" >
+
+<select name="Hours" id="hours" required>  
+    <option value="Select-Hours">Select Hours</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option selected value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+</select>
+
+<select name="Minutes" id="minutes" required>
+    <option value="Select-Minutes">Select Minutes</option>
+    <option selected value="00">00</option>
+    <option value="05">05</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+    <option value="25">25</option>
+    <option value="30">30</option>
+    <option value="35">35</option>
+    <option value="40">40</option>
+    <option value="45">45</option>
+    <option value="50">50</option>
+    <option value="55">55</option>
+</select>
+
+<select name="AmPm" id="AmPm" required>
+    <option selected value="AM">AM</option>
+    <option value="PM">PM</option>
+</select>
+
+<input type="hidden" name="type" value="wake">
+<input type="submit" value="Calculate">
+
+</form>
+
+
+<!-- Sleep now from 2 -->
+<form style="display: inline;" id="SleepNow2" method="post">
+    <!-- Hidden elements i will send to backend  -->
+<input type="hidden" name="Hours" class="hourInput">
+<input type="hidden" name="Minutes" class="minuteInput">
+<input type="hidden" name="AmPm" class="AmPmInput">
+
+<input type="hidden" name="type" value="sleepNow">
+<input type="submit" value="Sleep Now">
+
+</form>
+
+<div id="sleepResult" class="result-container"></div>
+<div id="sleepNowResult" class="result-container"></div>
+<div id="sleepNowResult2" class="result-container"></div>
+<div id="WakeUpResult" class="result-container"></div>
+
+<script src="../Frontend/script.js"></script>
 </body>
 </html>
