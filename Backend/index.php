@@ -1,8 +1,8 @@
 <?php
-echo "<pre>";
+// echo "<pre>";
 // print_r($_SERVER);
-print_r($_POST);
-echo "</pre>";
+// print_r($_POST);
+// echo "</pre>";
 // echo $_POST["Hours"];
 
 if ($_POST['type'] == "sleep") 
