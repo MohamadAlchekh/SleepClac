@@ -10,10 +10,11 @@ if ($_POST['type'] == "sleep")
    // sleep for 
    function Sleep_At_These_Hours()
    {
+      $Hour = $_POST["Hours"];
+      $Minutes = str_pad($_POST["Minutes"], 2, "0", STR_PAD_LEFT);
+      $AmPm = $_POST["AmPm"];
+      
        echo "<h1>Sleep at these times plz</h1>";
-       $Hour = $_POST["Hours"];
-       $Minutes = $_POST["Minutes"];
-       $AmPm = $_POST["AmPm"];
    
        echo "If you want to walk up at ${Hour}:${Minutes} ${AmPm} consider sleeping at these times";
        echo "<br>";
@@ -50,7 +51,7 @@ else if ($_POST['type'] == "wake")
    {
       echo "<h1>Wake up at these times plz</h1>";
       $Hour = $_POST["Hours"];
-      $Minutes = $_POST["Minutes"];
+      $Minutes = str_pad($_POST["Minutes"], 2, "0", STR_PAD_LEFT);
       $AmPm = $_POST["AmPm"];
   
       echo "If you want to sleep at ${Hour}:${Minutes} ${AmPm} consider waking up at these times";
@@ -90,7 +91,7 @@ else if ($_POST['type'] == "sleepNow")
    {
       echo "<h1>Wake up at these times plz</h1>";
       $Hour = $_POST["Hours"];
-      $Minutes = $_POST["Minutes"];
+      $Minutes = str_pad($_POST["Minutes"], 2, "0", STR_PAD_LEFT);
       $AmPm = $_POST["AmPm"];
 
       echo "If you want to sleep now ${Hour}:${Minutes} ${AmPm} consider waking up at these times";
@@ -99,34 +100,33 @@ else if ($_POST['type'] == "sleepNow")
       if($_POST["Hours"] and $_POST["Minutes"] and $_POST["AmPm"])
       {
   
-         $time = "${Hour}:${Minutes}";
-         
+         $time = "${Hour}:${Minutes} ${AmPm}";
          // sleep for 1 and a half hours - 1 Cycle
-         echo date("g:i A",strtotime($time . "+ 1 hours + 30 minutes"));
+         echo date("g:i A",strtotime("${time} + 1 hours + 30 minutes"));
          
          echo "<br>";
          
          // sleep for 3  hours - 2 Cycles
-         echo date("g:i A",strtotime($time . "+ 3 hours"));
+         echo date("g:i A",strtotime("${time} + 3 hours"));
          
          echo "<br>";
 
          // sleep for 4 and a half hours - 3 Cycles
-         echo date("g:i A",strtotime($time . "+ 4 hours + 30 minutes"));
+         echo date("g:i A",strtotime("${time} + 4 hours + 30 minutes"));
          
          echo "<br>";
          
          // sleep for 6 hours - 4 Cycles
-         echo date("g:i A",strtotime($time . "+ 6 hours"));
+         echo date("g:i A",strtotime("${time} + 6 hours"));
          
          echo "<br>";
          
          // sleep for 7 and a half hours - 5 Cycles
-         echo date("g:i A",strtotime($time . "+ 7 hours + 30 minutes"));
+         echo date("g:i A",strtotime("${time} + 7 hours + 30 minutes"));
          echo "<br>";
          
          // sleep for 9 hours - 6 Cycles
-         echo date("g:i A",strtotime($time . "+ 9 hours"));
+         echo date("g:i A",strtotime("${time} + 9 hours"));
   
    }
    }
